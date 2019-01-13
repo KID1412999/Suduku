@@ -15,6 +15,18 @@ class Node(object):
         pass
         return "Node: {}, Q: {}, children:{}, state:\n {}".format(
             hash(self), self.question, self.children,self.state)
+def check(x,y,s):
+    p=''
+    for i in range(9):
+        p+=s[i][y]+s[x][i]
+    l,m=x//3,y//3
+    l,m=l*3,m*3
+    #print(l,m)
+    for i in range(3):
+        for j in range(3):
+            p+=s[l+i][m+j]
+    
+    return set(p.replace('0',''))
 def expand(node):
     if len(node.question)>0:
         current_node=node
