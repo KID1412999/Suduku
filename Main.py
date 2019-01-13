@@ -27,10 +27,20 @@ def check(x,y,s):
             p+=s[l+i][m+j]
     
     return set(p.replace('0',''))
+def eva(q,s):#找到最好解的点，先解决
+    global a
+    k={}
+    for  i in q:
+        k[i]=len(a-check(i[0],i[1],s))
+    w=()
+    for i,j in k.items():
+        if j==min(k.values()):
+            w=i
+    return w
 def expand(node):
     if len(node.question)>0:
         current_node=node
-        q=current_node.question[0]
+        q=eva(current_node.question,current_node.state)#先算最好算的点（可能性最低的点）
         x,y=q[0],q[1]
         print(x,y)
         p=a-check(x,y,current_node.state)
